@@ -21,26 +21,21 @@ finalNotTriangle:.asciiz "the output is (Not Triangle)\n"
 mainmssg:.asciiz "\n\n***********************************************************************\nEnter the number to choose an operation\nAdd two numbers choose 1\nmultiplication two numbers choose 2\ndivide two numbers choose 3\nget minimum of list choose 4\ndetermine if the shape is Square or Rectangle chooose 5\ndetermine if the shape is triangle or not choose 6\nTo terminate the program choose 0\n************************************************************************\n"
        .text 
 main:
-out1:#result from jumb the first condition add func
-out2:#result from jumb the second condition multiplication two numbers
-out3:#result from jumb the third condition division two numbers 
-out4:#result from jumb the fourth condition get min of list
-out5:#result from jumb the fifth condition add func
-out6:#result from jumb the sixth condition add func
-out7:#result from jumb the seventh condition add func
+#(repeat the program untill teminated)...
+
 li $v0,4#if we need to show messege"from system call table"
 la $a0,mainmssg#load the addrees of line into a0
 syscall#shows messege that's tell the user that "the output is main massage"
 li $v0, 5#read an integer"from system call table"
 syscall#shows messege that's tell the user to enter the operation number"
 add $s7,$zero,$v0#store the number of operation into register s7
-li $t0,0#load value 0 into regoister t0
-li $t1,1#load value 1 into regoister t1
-li $t2,2#load value 2 into regoister t2
-li $t3,3#load value 3into regoister t3
-li $t4,4#load value 4into regoister t4
-li $t5,5#load value 5 into regoister t5
-li $t6,6#load value 6 into regoister t6
+li $t0,0#load value 0 into register t0
+li $t1,1#load value 1 into register t1
+li $t2,2#load value 2 into register t2
+li $t3,3#load value 3into register t3
+li $t4,4#load value 4into register t4
+li $t5,5#load value 5 into register t5
+li $t6,6#load value 6 into register t6
 bne $s7,$t1,conn1#if(s7!=1)
 main1:#if the condition if false means that (s7==1) so we will excute the Add func
 	li $v0, 4 # 
@@ -60,7 +55,7 @@ main1:#if the condition if false means that (s7==1) so we will excute the Add fu
 	li $v0, 1  
 	add $a0,$zero,$v1 # initialize $a0 = $v1 to print result to user 
 	syscall
-	j out1 #jumb instrc to return to the main call
+	j main #jumb instrc to return to the main call
 conn1:#if the condition true means that (s7!=1)may be value in range(2 to 6) 
 bne $s7,$t2,conn2 #if(s7!=2)
     #start main project
@@ -111,7 +106,7 @@ bne $s7,$t2,conn2 #if(s7!=2)
  #to store the product s1 into a0 to show it
  add $a0,$0,$s1
  syscall
-j out2#jumb instrc to return to the main call
+j main#jumb instrc to return to the main call
 conn2:#if the condition true means that (s7!=2) 
 bne $s7,$t5,conn5 #if(s7!=5)
 main5:#if the condition if false means that (s7==1) so we will excute check square or Rectangle
@@ -193,7 +188,7 @@ la $a0,final3notboth#load the addrees of line into a0
 	syscall#shows messege that's tell the user that "the output is not a rectangle"
 	RExit:#"Exit" means every jumb i made it will skip the code after the jumb and resume from this line
 #/////////////////////////////////////////////////////////////////////////////////////////////////
-j out5#jumb instrc to return to the main call
+j main#jumb instrc to return to the main call
 conn5:#if the condition true means that (s7!=5) 
 bne $s7,$t6,conn6#if(s7!=6)
 main6:#if the condition if false means that (s7==6) so we will excute check triangle or not
@@ -252,7 +247,7 @@ li $v0,4#if we need to show messege"from system call table"
 la $a0,finalTriangle#load the addrees of line into a0
 syscall#shows messege that's tell the user that "the output is "triangle"
 tExit:#"Exit" means every jumb i made it will skip the code after the jumb and resume from this line
-j out6#jumb instrc to return to the main call
+j main#jumb instrc to return to the main call
  conn6:#if the condition true means that (s7!=6) 
  bne $s7,$t4,conn4#if(s7!=6)   
  mainMin:#if the condition if false means that (s7==4) so we will excute "get the minimum of list"
@@ -302,7 +297,7 @@ j out6#jumb instrc to return to the main call
       li $v0,1#according to the system call table we need to make v0 equal 1 and a0 equal the nedded integer to print an integer
       add $a0,$zero,$s1 #save the value of the minimum number s1 to a0 to be printed
       syscall      
-j out4#jumb instrc to return to the main call
+j main#jumb instrc to return to the main call
 conn4:#if the condition true means that (s7!=5) 
 bne $s7,$t3,conn3#if(s7!=6)
 main3:
@@ -324,7 +319,7 @@ syscall # to show the message
 li $v0,1 # to print the integer
 add $a0, $zero,$s2 
 syscall
-j out3#jumb instrc to return to the main call
+j main#jumb instrc to return to the main call
 conn3:#if the condition true means that (s7!=3) (s7==0) 
 li $v0,10#to terminate the problem in that case if (s7==0) that will terminate
 syscall
